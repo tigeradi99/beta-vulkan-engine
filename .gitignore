@@ -12,4 +12,8 @@ cmake-build-debug-visual-studio/**
 assets/BoomBox/**
 assets/Lantern/**
 assets/sponza-gltf-pbr/**
-build/** 
+build/**
+*.dll
+*.ilk
+*.pdb
+*.exe

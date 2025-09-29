@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.31)
 project(x_engine)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -9,6 +9,7 @@ option(XE_ASSIMP_SHARED "Build Assimp as a shared lib (assimp.dll)" ON)  # flip 
 # Vulkan SDK
 if(DEFINED ENV{VULKAN_SDK})
     set(VULKAN_SDK_PATH $ENV{VULKAN_SDK})
+    find_package(Vulkan REQUIRED)  # provides Vulkan::Vulkan
 else()
     message(FATAL_ERROR "VULKAN_SDK not set")
 endif()
@@ -22,7 +23,7 @@ set(ASSIMP_DIR ${CMAKE_SOURCE_DIR}/external/assimp)
 
 
 # ---- Third-party: GLFW (static) ----
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)           # default static for libs unless overridden
+set(BUILD_SHARED_LIBS ON CACHE BOOL "" FORCE)           # default static for libs unless overridden
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS    OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_DOCS     OFF CACHE BOOL "" FORCE)
@@ -35,9 +36,9 @@ add_subdirectory(${GLM_DIR})
 
 # ---- Third-party: Assimp (shared or static) ----
 if (XE_ASSIMP_SHARED)
-  set(ASSIMP_BUILD_SHARED_LIBS ON  CACHE BOOL "" FORCE)
+  set(BUILD_SHARED_LIBS ON  CACHE BOOL "" FORCE)
 else()
-  set(ASSIMP_BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
+  set(BUILD_SHARED_LIBS OFF CACHE BOOL "" FORCE)
 endif()
 set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF CACHE BOOL "" FORCE)
 set(ASSIMP_BUILD_OBJ_IMPORTER   ON  CACHE BOOL "" FORCE)
@@ -56,13 +57,6 @@ include_directories(
         ${IMGUI_DIR}
         ${STB_DIR}
         ${ASSIMP_DIR}/include
-)
-
-# Link directories
-link_directories(
-        ${VULKAN_SDK_PATH}/Lib
-        ${CMAKE_SOURCE_DIR}/external/glfw/lib
-        ${CMAKE_SOURCE_DIR}/external/assimp/lib
 )
 
 # Source files
@@ -97,7 +91,7 @@ target_compile_definitions(x_engine PRIVATE GLFW_INCLUDE_NONE)
 
 # Link libraries
 target_link_libraries(x_engine
-        vulkan-1
+        Vulkan::Vulkan
         glfw
         glm::glm
         assimp

@@ -64,7 +64,7 @@ namespace xe {
         init_info.PipelineCache = VK_NULL_HANDLE;
         init_info.DescriptorPool = imGuiDescriptorPool;
 
-        init_info.RenderPass = xe_renderer.getSwapChainRenderPass();
+        //init_info.RenderPass = xe_renderer.getSwapChainRenderPass();
         //init_info.Subpass = 0;
 
         init_info.MinImageCount = XESwapChain::MAX_FRAMES_IN_FLIGHT;
