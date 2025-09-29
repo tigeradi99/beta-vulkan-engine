@@ -17,3 +17,6 @@ build/**
 *.ilk
 *.pdb
 *.exe
+
+# Imgui.ini
+imgui.ini
