@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.31)
+cmake_minimum_required(VERSION 3.21)
 project(x_engine)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -18,7 +18,7 @@ set(GLFW_DIR ${CMAKE_SOURCE_DIR}/external/glfw)
 set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/external/imgui)
 set(GLM_DIR ${CMAKE_SOURCE_DIR}/external/glm)
 set(STB_DIR ${CMAKE_SOURCE_DIR}/external/stb)
-set(ASSIMP_DIR ${CMAKE_SOURCE_DIR}/external/assimp/include)
+set(ASSIMP_DIR ${CMAKE_SOURCE_DIR}/external/assimp)
 
 
 # ---- Third-party: GLFW (static) ----
@@ -55,7 +55,7 @@ include_directories(
         ${GLM_DIR}
         ${IMGUI_DIR}
         ${STB_DIR}
-        ${ASSIMP_DIR}
+        ${ASSIMP_DIR}/include
 )
 
 # Link directories
@@ -75,8 +75,8 @@ set(IMGUI_SRC_FILES
         ${IMGUI_DIR}/imgui_widgets.cpp
         ${IMGUI_DIR}/imgui_tables.cpp
         ${IMGUI_DIR}/imgui_demo.cpp
-        ${IMGUI_DIR}/imgui_impl_glfw.cpp
-        ${IMGUI_DIR}/imgui_impl_vulkan.cpp
+        ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp
+        ${IMGUI_DIR}/backends/imgui_impl_vulkan.cpp
 )
 
 add_executable(x_engine ${SRC_FILES} ${IMGUI_SRC_FILES})
