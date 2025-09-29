@@ -14,7 +14,6 @@ endif()
 set(GLFW_DIR ${CMAKE_SOURCE_DIR}/external/glfw)
 set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/external/imgui)
 set(GLM_DIR ${CMAKE_SOURCE_DIR}/external/glm)
-set(TINYOBJ_DIR ${CMAKE_SOURCE_DIR}/external/tinyobjloader)
 set(STB_DIR ${CMAKE_SOURCE_DIR}/external/stb)
 set(ASSIMP_DIR ${CMAKE_SOURCE_DIR}/external/assimp/include)
 
