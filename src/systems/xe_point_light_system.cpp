@@ -62,7 +62,8 @@ namespace xe {
         xe_pipeline = std::make_unique<XEPipeline>(xe_device,
             "assets\\shaders\\point_light_shader.spv",
             "assets\\shaders\\point_light_fragment.spv",
-            pipelineConfig);
+            pipelineConfig,
+            "graphics");
     }
 
     void XEPointLightSystem::render(FrameInfo& frame_info, uint32_t instanceCount) {

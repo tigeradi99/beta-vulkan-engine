@@ -37,7 +37,8 @@ namespace xe {
         XEPipeline(XEDevice& device,
             const std::string& vertFilePath,
             const std::string& fragFilePath,
-            const PipelineConfigInfo& configInfo);
+            const PipelineConfigInfo& configInfo,
+            const std::string& type);
 
         // For shadow render pass
         XEPipeline(XEDevice& device,
@@ -52,6 +53,7 @@ namespace xe {
 
         static void defaultPipelineConfigInfo(PipelineConfigInfo& configInfo);
         static void defaultShadowPipelineConfigInfo(PipelineConfigInfo& configInfo);
+        static void defaultSkyboxPipelineConfigInfo(PipelineConfigInfo& configInfo);
 
     private:
         static std::vector<char> readFile(const std::string& filePath);
@@ -60,6 +62,9 @@ namespace xe {
             const std::string& fragFilePath,
             const PipelineConfigInfo& configInfo);
         void createShadowPassPipeline(const std::string& vertFilePath, const PipelineConfigInfo& configInfo);
+        auto createSkyboxPipeline(const std::string &vertFilePath,
+                                  const std::string &fragFilePath,
+                                  const PipelineConfigInfo &configInfo) -> void;
 
         void createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule);
 

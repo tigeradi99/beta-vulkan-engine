@@ -6,6 +6,7 @@
 
 #include <stdexcept>
 #include <array>
+#include <string>
 #include <cassert>
 #include <iostream>
 
@@ -68,6 +69,8 @@ namespace xe {
     void XESimpleRenderSystem::createPipeline(VkRenderPass renderPass) {
         assert(xe_pipeline_layout != nullptr && "Cannot create pipeline before pipeline layout!");
 
+        std::string pipelineType = "graphics";
+
         PipelineConfigInfo pipelineConfig = {};
         XEPipeline::defaultPipelineConfigInfo(pipelineConfig);
         pipelineConfig.renderPass = renderPass;
@@ -75,7 +78,8 @@ namespace xe {
         xe_pipeline = std::make_unique<XEPipeline>(xe_device,
             "assets\\shaders\\simple_shader.spv",
             "assets\\shaders\\simple_fragment.spv",
-            pipelineConfig);
+            pipelineConfig,
+            pipelineType);
     }
 
     void XESimpleRenderSystem::renderGameObjects(FrameInfo& frame_info, VkDescriptorSet shadowSamplerDescriptorSet) {
