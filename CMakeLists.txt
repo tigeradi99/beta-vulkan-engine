@@ -93,7 +93,7 @@ target_compile_definitions(x_engine PRIVATE GLFW_INCLUDE_NONE)
 target_link_libraries(x_engine
         Vulkan::Vulkan
         glfw
-        glm::glm
+        glm::glm-header-only
         assimp
 )
 
